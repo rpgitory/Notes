@@ -1,0 +1,419 @@
+05/23/2024
+zcat a.txt.gz => shows a file content withou uncompressed it.
+
+tar, star (structure tar), available on SElinux [secure enhance linux]
+
+cpio command [copy file from archieve]
+
+05/24/2024
+
+To see skel default path => /etc/default/useradd [so whatever we put in skel folder which will be added on new user. like if we add a file with file content so when we will create a news user using useradd command at time if we check in home directory of new user, there we will see a file which we creared in /etc/skel folder]
+
+05/25/2024 
+
+ICMP (Internet Control Message Protocol) - Protocol number: 1
+
+Used for network diagnostics (e.g., ping, traceroute).
+IGMP (Internet Group Management Protocol) - Protocol number: 2
+
+Used for managing multicast group memberships.
+TCP (Transmission Control Protocol) - Protocol number: 6
+
+Provides reliable, ordered, and error-checked delivery of data (e.g., HTTP, FTP).
+UDP (User Datagram Protocol) - Protocol number: 17
+
+Provides a connectionless, datagram service with no guarantees (e.g., DNS, DHCP).
+IPv6 header (Encapsulation) - Protocol number: 41
+
+Used to encapsulate IPv6 packets in IPv4 networks.
+GRE (Generic Routing Encapsulation) - Protocol number: 47
+
+Used to encapsulate a wide variety of network layer protocols inside virtual point-to-point links.
+ESP (Encapsulating Security Payload) - Protocol number: 50
+
+Used for providing integrity, authentication, and encryption of network packets in IPsec.
+AH (Authentication Header) - Protocol number: 51
+
+Used for authenticating the origin of the packets in IPsec.
+ICMPv6 (Internet Control Message Protocol for IPv6) - Protocol number: 58
+
+Similar to ICMP but designed for IPv6.
+OSPF (Open Shortest Path First) - Protocol number: 89
+
+A routing protocol for IP networks that uses a link-state routing algorithm.
+EIGRP (Enhanced Interior Gateway Routing Protocol) - Protocol number: 88
+
+A Cisco proprietary routing protocol that is used on a computer network for automating routing decisions and configuration.
+PIM (Protocol Independent Multicast) - Protocol number: 103
+
+Used for efficiently routing multicast data streams.
+SCTP (Stream Control Transmission Protocol) - Protocol number: 132
+
+A transport-layer protocol used for message-oriented communication with features like multi-homing and redundant paths.
+
+OSPF (Open Shortest Path First) - Protocol number: 89
+
+
+
+ICMP (Internet Control Message Protocol) - Protocol number: 1
+IGMP (Internet Group Management Protocol) - Protocol number: 2
+TCP (Transmission Control Protocol) - Protocol number: 6
+EGP (Exterior Gateway Protocol) - Protocol number: 8
+IGP (Interior Gateway Protocol) - Protocol number: 9
+UDP (User Datagram Protocol) - Protocol number: 17
+IPv6 header (Encapsulation) - Protocol number: 41
+GRE (Generic Routing Encapsulation) - Protocol number: 47
+ESP (Encapsulating Security Payload) - Protocol number: 50
+AH (Authentication Header) - Protocol number: 51
+ICMPv6 (Internet Control Message Protocol for IPv6) - Protocol number: 58
+OSPF (Open Shortest Path First) - Protocol number: 89
+PIM (Protocol Independent Multicast) - Protocol number: 103
+SCTP (Stream Control Transmission Protocol) - Protocol number: 132
+
+
+grep "rid" a.txt b.txt
+
+tail -f a.log [display live time last lines]
+
+https://learn.adept.at/cbtnuggets/red-hat-certified-system-administrator-rhcsa-exam-ex200/skill/understand-and-modify-file-permissions
+
+- special permission (suid,sgid, sticky bit)
+
+umaask :- default umask is 0022 [for file by default 0666, for directory 0777] so created new file and directory value will be 0666-0022 and 0777-0022
+
+05/28/2024
+
+pidof ping or pidof pin [gives the ping pid] 
+pgrep ping or pgrep pin [gives the ping pid and group id]
+
+jobs [shows available jobs] jobs can be stopped by 'ctrl+z'
+fg %1 [1 is job number and fg for foreground so it will resume job]
+
+nice [nice value -20 ... 19+]
+renice 
+
+05/29/2024
+netstat alternative command ss [netstat is depricated now it's ss]
+netstat -g alternative ss -g or ip maddr
+apr -a alternative ip n or ip neigh
+arp -v alternative ip -s neigh or ip -s n
+route alternative ip r
+
+last [to display last login details]
+stat a.txt [To know the state of directory or file]
+
+swap space = virtual memory where we used hard drive space as a RAM
+
+05/30/2024
+du [disk usage]
+
+lvm [logical volume management]
+made by three component
+	Physical volume [PV]
+	Volume Group [VG] = Combine result of PV
+	Logical Volumes [LV]
+
+lsblk -F [To Display all available disk]
+pvdisplay [Physical Volume display], pvs
+pvcreate [To create Physical Volume] ex: pvcreate /dev/nveme1
+
+vgdisplay [Volume Group Display], vgs
+vgcreate myvolumegroup /dev/nvme1 /dev/nvme2 /dev/nvme3
+
+lvdisplay [Logical Volume Display], lvs
+lvcreate -n firstchunk -L 2.5G myvolumegroup
+lvcreate -n secondchunk -l 50%Free myvolumegroup
+
+lvm 
+lvm > help [all logical volume commands]
+vgextend
+
+**strace command in linux**
+
+Straits [sotrage solution like lvm] -> think provisioning 
+sudo stratis pool create testpool /dev/nvme1
+sudo stratis pool list
+sudo stratis pool add-data testpool /dev/nvme1
+sudo stratis blockdev list
+sudo stratis fs create testpool fstest
+sudo stratis fs list
+
+05/31/2024
+cron.allow will take permission over cron.deny file
+at command [Run all commands at same time ] ex at tuesday and entered commands so it will run on tuesday, also you can check it by using 'atq' command
+at sunday +1 hour [so it will run on sunday same time when you created this job +1 hour ]
+at 4pm + 5 days 
+
+sudo systemctl mask redis [it goes to /dev/null which is black hole]
+sudo systemctl unmask redis 
+
+create service in /etc/systemd/system directory with file a.time and a.service
+
+06/02/2024
+vmlinuz [z indicates the file is compressed] if not z at the end of it then these files are uncompressed
+
+lilo boot loader [linux loader, MBR partitions old one]
+grub 
+grub2 [latest, UEFI, GPT partition]
+
+dmesg [shows kernel ring buffer]
+
+runlevel boot target [0-6]
+rulevel,telinit command
+
+06/03/2024
+1. rsync -ar test user@ip-adder:$HOME [rsync will synchronize test directory to remote location using ssh]
+
+2. scp a.txt user@ip-adder:$HOME 
+   scp user@ip-adder:/home/user/music/a.txt /home/tmp [it will copy file from remote location to our computer] **most used 
+
+3. sftp user@ip-adder [provide interactive mode]
+
+06/04/2024
+sudo firewall-cmd --permanent --add-service=nfs
+sudo firewall-cmd --permanent --add-service=moundtd
+sudo firewall-cmd --permanent --add-service=rpc-bind
+sudo firewall-cmd --reload
+
+06/05/2024
+lsattr [attribute]
+chattr [add attribute to file], chattr +i test.txt [immutable file means we can't write anything on this file]
+
+getfacl
+setfacl 
+
+getenforce [SElinux], Enforcing (blocked), Permissive (logs), disabled (off)
+sestatus [to see status of acl in SElinux]
+sudo setenforce permissive or sudo setenfoce 0
+sudo setenforce enforcing or sudo setenforce 1
+
+chcon [temporary solution]
+semanage [permenet solution]
+getsebool
+setsebool
+
+journalctl | grep sealert
+
+dd
+yum [old or legacy package manager for red hat]
+dnf [package manager for red hat enterprise for installing packages]
+dnf list [all installed packages]
+dnf search nano [search for utilities]
+
+06/06/2024
+network based firewall is implemened on dedicated device
+/etc/services [location to know which are the common ports]
+firewalld [redhat firewall]
+nftables 
+iptables [common linux firewall] NAT,filter, and mangle [modifying head of packets]
+
+firewalld 
+	home zone [firewall rules can be more relax, easy give access to]
+	public zone [most of locked policy]
+	
+zone conf files 
+/usr/lib/firewalld/zones/
+
+sudo systemctl status firewalld
+sudo firewalld-cmd --list-all
+sudo firewalld-cmd --get-services 
+sudo firewalld-cmd --zone=home --list-services 
+sudo firewalld-cmd --zone=dmz --list-services 
+sudo firewalld-cmd --zone=home --add-service ftp [if add --permanent] then it will be permanent even if system reboot
+sudo firewalld-cmd --set-default-zone=home
+
+PTR record [like we provide ip address and it will gives a domain name, from IP to domain name]
+/etc/nsswitch.conf [to where we can find or see, from where dns record will start finding like from static file first (/etc/hosts) then DNS records]
+
+host command
+systemd-journald command
+rsyslog [Rsyslog works in conjunction with systemd-journald and allows our log files to be stored remotely and persistently]
+
+*******Question******* [what system or service stores a log i mean who is responsible for saving logs and how!!]
+/etc/logrotate.conf
+sudo logger [to add a log into system]
+
+vmstat 
+
+podman == docker [container provider service]
+image = file or blueprint or template from where we can creat a instance 
+instance = derive from image 
+
+podman images [list available images]
+podman pull nginx:latesl [pull images]
+sudo podman run --name web1 -d -p 80:80 image_id  or sudo podman run --name web1 -d -p 1133:80 image_id 
+podman ps [shows running instances]
+podman stop web1
+podman ps -a 
+podman rm web1 [remove instance], can't remove instances before stopping it.
+
+podman run --name web1 -d -p 1133:80 image_id sleep infinity 
+podman exec web1 ls
+podman run -it --name web1 image_id /bin/bash 
+podman rmi fedora [remove image by image_id]
+podman built -t customfed -f containerfile . [. for in current direcotry] view it by cmnd 'podman images'  
+podman volume crate my_data
+
+sudo loginctl enable-linger user
+ss -tuln
+
+***************************************************************************************************
+Linux Administrator
+
+06/08/2024
+Kernel panic [Due to pending sys updates,falsey hardware, miss matched ram freq and type] 
+que = how to observed if there is a kernel panic 
+insmod [insert kernel module]
+rmmod
+modprobe [search module just by sending name, it will look for that module path and dependencies], modprobe just know which kerenl to load and what dependency but insmod will actually load kernel module.
+depmod [update db, or sys kernel map]
+
+06/09/2024
+dig
+nslookup
+host
+
+/etc/nsswitch.conf [To where it mention how DNS will resolve query, 1 /etc/hosts, 2 server and so on]
+
+06/11/2024
+last [to know user log-in n]and log-out time]
+lastb
+lastlog -u username 
+
+
+
+Category 			List of unix & linux command
+Download manager 		wget 
+document[help]			help,man, mandb, pinfo
+disk space analyzers		df, duf, ncdu, pydf
+File Management 		cat, less, more, tree
+Modern utilities 		bat, exa 
+network utilities 		nethogs, dig, host, ip, nmap
+Package Manager 		apk, apt
+Process Management[PRM]		bg, chroot, cron, disown, fg, glances, gtop, iotop, jobs, killall, kill, pidof, pwdx, time, top
+searching 			ag, grep, whereis, which
+shell builtins			compgen, echo, printf
+text processing			cut,rev, sed, awk [data extraction tools]
+user info			groups, id, lastcomm, last, lastb, lastlog, lid/libuser-lid, logname, members, users, whoami, uname, who, w
+
+06/12/2024
+write-output 'hello' [powershell to print on display like echo]
+
+apt [new version of apt-get command], dpkg, aptitude 
+yum [yellowdog updater manager], DNF [Dandified yum], pacman [arch linux], zypper [opensus]
+
+useradd, userdel, usermod is a command where adduser is a script in linux 
+
+w [shows whos logged in and what they are doing]
+
+w, last, pinky [new version of finger command], id, whoami, who
+
+vipw [Edit the password file /etc/passwd or /etc/shadow], vigr [Edit a group file, /etc/gshdow] 
+
+06/12/2024
+tee [It passes the whatever it gets in stdin, puts in stdout, and writes what it gets in stdin file]
+Ex. cat a.txt | tee b.txt
+
+xargs, tee, /dev/null
+
+sudo updatedb [update cache db, it means if we creted any new file then it will be easily find by locate command but after one two days cache will be gone so for updating cache (sudo updatedb)]
+
+find . -name *filename*
+find / -name a.txt -delete >2 /dev/null
+
+modern system uses 'systemD' to managining services in linux
+systemD [/etc/systemD/system, scattered in folders], systemctl 
+
+File services
+samba - windows [hoasted on linux but accessible for windows machine]
+NFS - Linux, Mac, Win
+netatalk - Apple 
+
+Print 
+Cups - windows, mac, linux
+netatalk - apple
+
+Mail
+postfix
+Email
+sendmail
+
+Proxy
+squid
+squidguard
+
+container don't have their own OS.
+
+06/18/2024
+nohup [ensures the bg task doesn't quit when the user log outs]
+sleep 111 & [& to put job running on background]
+fg,bg,jobs,nohup
+
+
+finding local device
+dmesg, lsub, lspci, lsdev, lsblk [to print all ls.. jsut type ls two tab]
+
+cups [printing commands]
+lp + 2 tab [ip command, lpr, lpq ...] ex echo 'this sentence should be printer' | lpr
+
+udev
+udevadm 
+
+vncserver -l [list of connected server, remote login]
+
+sar [sysstat] 
+/proc/meminfo
+vmstat 1
+
+/etc/fstab [To enable swap files, to extend memory from HDD]
+
+cfq = Equally distributes read and write operations
+deadline = By default, prioritize read operations
+noop = No scheduling at all
+
+tune2fs [forced disk scanning], never scanned mounted drive ever else ready for circumstances
+fsck
+tune2fs -c 1 /dev/sda1
+
+xfs_growfs [expand xfs partition]
+
+vgdisplay, pvdisplay
+
+journalctl [includes all logs in one]
+less is able to read text file G7 without extracting it.
+
+sudo !! [!! will run last command]
+
+tar [Backing up files in a filesystem hierachy], dd [creating an image of entire device], cpio [backing up a list of files in a single directory]
+
+zip, gzip, bzip2, xz, tar [bad --> Best]
+
+06/20/2024
+
+diff betw Availability set and availability zone in Azure
+
+
+
+09/02/2025
+
+Find files:
+
+find . -name flag1.txt: find the file named “flag1.txt” in the current directory
+find /home -name flag1.txt: find the file names “flag1.txt” in the /home directory
+find / -type d -name config: find the directory named config under “/”
+find / -type f -perm 04000: find files with the 777 permissions (files readable, writable, and executable by all users)
+find / -type f -perm -04000 -ls 2>/dev/null
+find / -perm a=x: find executable files
+find /home -user frank: find all files for user “frank” under “/home”
+find / -mtime 10: find files that were modified in the last 10 days
+find / -atime 10: find files that were accessed in the last 10 day
+find / -cmin -60: find files changed within the last hour (60 minutes)
+find / -amin -60: find files accesses within the last hour (60 minutes)
+find / -size 50M: find files with a 50 MB size
+
+
+find . -name flag1.txt -type f 2>/dev/null [ -type f 2>/dev/null, send all unnecessary error output into null]
+find / -writable 2>/dev/null” [find out where current user can write in, write in what folder]
+find / -writable 2>/dev/null | cut -d "/" -f 2 | sort -u [by sorting order and will display only writeable folder name]
+find / -type d -name "test" -exec ls -l {} \; [Find directory and then run ls command on it]
+
