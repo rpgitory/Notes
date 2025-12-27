@@ -416,4 +416,4 @@ find . -name flag1.txt -type f 2>/dev/null [ -type f 2>/dev/null, send all unnec
 find / -writable 2>/dev/null” [find out where current user can write in, write in what folder]
 find / -writable 2>/dev/null | cut -d "/" -f 2 | sort -u [by sorting order and will display only writeable folder name]
 find / -type d -name "test" -exec ls -l {} \; [Find directory and then run ls command on it]
-
+find . | grep -i test [it will look for any file which has test text in name Ex: mytest.txt]

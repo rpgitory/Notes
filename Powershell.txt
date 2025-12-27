@@ -1,0 +1,7 @@
+"hi this is ,my email 1234s@k23._com" -match '\S+@\S+\.\S+'
+$Matches
+
+-match
+-replace
+-split
+select-string

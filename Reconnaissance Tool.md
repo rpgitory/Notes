@@ -1,0 +1,84 @@
+##### Reconnaissance Tool
+
+Subfinder
+
+amass
+
+dnsx
+
+gobuster \[brute force tool for sub directory]
+
+
+
+##### Check sub domains interaction with server Tool
+
+httpx 
+
+
+
+##### port scanning
+
+nmap
+
+masscan 
+
+
+
+##### screenshots
+
+HTTPScreensho 
+
+Gowitness
+
+Aquatone 
+
+eyewitness
+
+
+
+##### Port Discovery / Project discovery
+
+naabu 
+
+
+
+##### Code Review Tools
+
+Fortify \[static analysis tool] expensive in price
+
+checkmarx
+
+Covertiy \[not usefull for webapp]
+
+Veracode \[hosted service]
+
+
+
+##### directory buster
+
+feroxbuster
+
+dirbuster
+
+subfinder 
+
+
+
+##### Find out firewall 
+
+wafwoof
+
+
+
+##### vulnerability scanner
+
+nuclie \*\*Beast
+
+
+
+##### web crawler 
+
+katana 
+
+gitrob \[GitHub crawler]
+
