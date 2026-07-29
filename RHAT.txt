@@ -416,4 +416,28 @@ find . -name flag1.txt -type f 2>/dev/null [ -type f 2>/dev/null, send all unnec
 find / -writable 2>/dev/null” [find out where current user can write in, write in what folder]
 find / -writable 2>/dev/null | cut -d "/" -f 2 | sort -u [by sorting order and will display only writeable folder name]
 find / -type d -name "test" -exec ls -l {} \; [Find directory and then run ls command on it]
-find . | grep -i test [it will look for any file which has test text in name Ex: mytest.txt]
+
+06/22/2026
+Veeam Backup 
+how to access https://ip:9443 default port
+
+07/02/2026
+in vim [:%! ls] means it will run commands inside vim
+
+
+07/23/2026
+cat file.txt | cut -d ':' -f 1 [-f 1 means it keeps first part which is before ':' in file, file => user:password] 
+
+
+07/27/2026
+diff test.txt /downloads/test.txt [ to check differences between same files]
+revshells.com
+/usr/shell/webshell/php/simple-backdoor.php
+
+07/28/2026
+scp "file.txt" username@ip_of_system:     [where you want the file to be send, : means home directory]
+Note in case it failed and says service not running so enable ssh in system [ sudo systemctl start ssh 
+
+crack doc or any office file with password protected, we can use office2john to get hashes from file and then use for cracking
+office2john file.doc > file.hashes
+john file.hash --wordlist=/usr/share/wordlists/rockyou.txt --rule

