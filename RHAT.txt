@@ -1,5 +1,5 @@
 05/23/2024
-zcat a.txt.gz => shows a file content withou uncompressed it.
+zcat a.txt.gz => shows a file content without uncompressed it.
 
 tar, star (structure tar), available on SElinux [secure enhance linux]
 
