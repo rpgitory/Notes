@@ -1,0 +1,117 @@
+Networking Cisco
+? display all commands [user mode "Router>" and privileged mode "Router#" has different commands]
+
+show versions
+show running-config 
+show startup-config
+show ip interface brief 		Check interface status & IP
+show mac address-table			Check what are the devices connected to switch on what port
+show interfaces GigabitEthernet 0/1	Check detailed interface statistics:
+show ip route
+show ip arp 				Check what are the ip assigned to what devices using mac or in general.
+ip route 192.168.2.0 255.255.255.0 192.168.1.1 Configure a static route
+Show flash 				Check available memory in switch and current ios file in switch [ mostly use for upgrading firmware]
+delete flash://name_of_file 		Current version IOS file which want to delete to make space for upgrading new firmware
+copy tftp flash 			copy file from TFTP server and past to switch memory [flash]
+
+router ospf 1				Enable OSPF routing protocol
+ network 192.168.1.0 0.0.0.255 area 0
+
+router bgp 65001			Configure BGP for an external network
+ neighbor 10.10.10.1 remote-as 65002 
+
+show cdp neighbors			Check connected devices (CDP/LLDP):
+show lldp neighbors
+
+show mac address-table 			Check MAC-Address table
+show vlan brief				Check VLAN configuration
+show spanning-tree 			Check STP protocol
+show ip ospf neighbor	
+show ip bgp summary
+show logging
+terminal monitor 			Enable real-time logging on the console
+debug ip routing
+debug ip ospf events
+debug ip packet
+undebug all 				Stop all debugging 
+reload 					Restart device
+enable secret StrongPassword123
+
+Configuration commands
+enable 					Enable privilege mode
+Configure terminal 			Enable configuration global mode
+
+interface GigabitEthernet 0/1		Configure an interface
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+
+vlan 10					Configure VLAN on a switch
+ name IT_VLAN
+show vlan brief or show vlan static
+
+interface GigabitEthernet 0/2 		Assign a port to VLAN
+ switchport mode access
+ switchport access vlan 10
+
+ip default-gateway 192.168.1.254 	Set up a default gateway on a switch
+
+hostname Router01			Enable SSH access
+ip domain-name example.com
+crypto key generate rsa
+ip ssh version 2
+line vty 0 4
+ transport input ssh
+ login local
+
+access-list 101 permit tcp 192.168.1.0 0.0.0.255 any eq 22 [Access Control List [ACL] to restrict access]
+
+
+interface GigabitEthernet0/1		Configure port security on switches to prevent unauthorized devices
+ switchport port-security
+ switchport port-security maximum 2
+
+
+
+Wireshark – Captures network traffic for analysis.
+Ping & Traceroute – Troubleshoot connectivity issues.
+Nmap – Scans for open ports and vulnerabilities.
+Putty/Tera Term – SSH & Telnet client for remote access.
+Nagios / PRTG – Network monitoring tools for alerts.
+Cisco Packet Tracer / GNS3 – Simulates network configurations for practice.
+
+
+Cisco Switch Configuration Steps
+
+Step 1: Set Hostname of switch 
+Step 2: Set up Password
+Step 3: Set up VLAN
+Step 4: Set up ip address
+Step 5: Set up DHCP 
+[1-2]
+en
+config terminal
+hostname "name"
+enable secret Password123
+
+[3]
+vlan 10
+name "name_vlan10 for employee"
+vlan 20
+name "name_vlan20 for regular guest"
+interface gi1 [select port or ports] or interface range gi1/0/1-10
+switchport mode access
+switchport access vlan "name_vlan10 for employee" 		Access port can carry one vlan and trunk port can have multiple vlan
+
+[4]
+int vlan name_vlan10
+ip address 192.168.10.1 255.255.255.0
+no shutdown 
+ip default-gateway 192.168.10.1 or .254
+
+
+[5]
+conf t [ go back here]
+ip dhcp pool v10 [ can enter any pool name but suggested to go with vlan name so can identify]
+network 192.168.10.0 /24 [ give ip for pool /24 or /16]
+default-router 192.168.10.1 [ vlan IP or default gateway ip of VLAN]
+

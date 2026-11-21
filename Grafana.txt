@@ -1,0 +1,3 @@
+Grafana 
+
+Alloy: Open source, vendor neutral telemetry collector designed to gather process, and ship metrics, logs, traces from your machine to sent to loki.
